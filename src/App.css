@@ -1,0 +1,160 @@
+@import url("https://fonts.googleapis.com/css2?family=Share+Tech+Mono&display=swap");
+
+#root {
+  max-width: 100vw;
+}
+
+body {
+  background-color: #6c675a;
+  width: 100vw;
+  max-width: 100vw;
+  height: 100vh;
+  overflow: auto;
+  display: grid;
+  place-content: center;
+}
+
+#calculator {
+  background-color: #a1a499;
+  max-width: 100%;
+  width: 315px;
+  height: auto;
+  border: 2px solid #1d1d1b;
+  border-radius: 4px;
+}
+
+#display {
+  height: 80px;
+  width: 100%;
+
+  background-color: #52534d;
+  font-family: "Share Tech Mono", monospace;
+}
+
+#result {
+  text-align: right;
+  font-size: x-large;
+  color: #d5d5c4;
+  font-weight: bold;
+  padding-right: 6px;
+}
+
+#operation {
+  text-align: right;
+  font-size: large;
+  color: #d5d5c4;
+  padding-right: 6px;
+}
+
+.container {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    "clear clear divide multiply"
+    "seven eight nine subtract"
+    "four five six add"
+    "one two three equals"
+    "zero zero decimal equals";
+  height: 320px;
+}
+
+.container > * {
+  text-align: center;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid #52534d;
+  cursor: pointer;
+}
+
+.container > *:hover {
+  border: 1px solid #f0f1e9;
+}
+
+.number {
+  background-color: #9c9583;
+}
+
+.ac {
+  background-color: #b0bbbf;
+}
+
+.equals {
+  background-color: #cadbc8;
+}
+
+.math-operation {
+  background-color: #e2d4b7;
+}
+
+#seven {
+  grid-area: seven;
+}
+
+#eight {
+  grid-area: eight;
+}
+
+#nine {
+  grid-area: nine;
+}
+
+#four {
+  grid-area: four;
+}
+
+#five {
+  grid-area: five;
+}
+
+#six {
+  grid-area: six;
+}
+
+#one {
+  grid-area: one;
+}
+
+#two {
+  grid-area: two;
+}
+
+#three {
+  grid-area: three;
+}
+
+#zero {
+  grid-area: zero;
+}
+
+#equals {
+  grid-area: equals;
+}
+
+#add {
+  grid-area: add;
+}
+
+#subtract {
+  grid-area: subtract;
+}
+
+#multiply {
+  grid-area: multiply;
+}
+
+#divide {
+  grid-area: divide;
+}
+
+#decimal {
+  grid-area: decimal;
+}
+
+#clear {
+  grid-area: clear;
+}
