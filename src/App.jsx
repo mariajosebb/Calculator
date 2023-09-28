@@ -90,39 +90,79 @@ const CALCULATOR_KEYS = [
 ];
 
 function App() {
-  const [result, setResult] = useState(0);
+  const [result, setResult] = useState("");
 
   const [operation, setOperation] = useState("");
 
   const handleEqual = () => {
-    setResult(eval(operation));
+    setResult(String(eval(operation)));
+    setOperation(String(eval(operation)));
   };
 
   const handleClear = () => {
     setOperation("");
-    setResult(0);
+    setResult("");
   };
-
   const handleKey = (key) => {
     const specialKeys = {
       AC: () => handleClear(),
       "=": () => handleEqual(),
       x: () => handleKey("*"),
     };
+
     if (specialKeys[key]) return specialKeys[key]();
 
-    return setOperation((op) => op.concat(key));
+    const regexPunto = /\./;
+    const validKeysRegex = /^[+\-*/]$/;
+
+    setOperation((op) => {
+      // Check if the last character in operation is an operator (excluding -)
+      if (op && op[op.length - 1].match(validKeysRegex)) {
+        if (key === op[op.length - 1]) return op;
+        if (key === "-") {
+          return op + key;
+        }
+        if (key.match(validKeysRegex)) return op.slice(0, -2) + key;
+        // Allow entering "-" as a negative sign
+        return op + key;
+      } else if (
+        key === "." &&
+        (result.endsWith(".") || result.match(regexPunto))
+      ) {
+        return op;
+      } else {
+        return op?.concat?.(key);
+      }
+    });
+
+    setResult((prevResult) => {
+      if (prevResult.match(validKeysRegex)) return key;
+      if (key === "." && (result.endsWith(".") || result.match(regexPunto)))
+        return prevResult;
+
+      // Update the result as the user inputs numbers and handles negative sign
+      if (key.match(validKeysRegex) || (key === "-" && prevResult === "")) {
+        return key;
+      }
+      if (prevResult === "0" && key === "0") {
+        return key;
+      }
+      if (prevResult === "0") {
+        return prevResult + key;
+      } else {
+        return prevResult + key;
+      }
+    });
   };
 
   return (
     <>
       <div id="calculator">
-        <div id="display">
-          <div id="operation">
-            {operation.replace(/\*/g, "x")}
-            {result > 0 && `=${result}`}
+        <div id="display-container">
+          <div id="operation">{operation?.replace?.(/\*/g, "x")}</div>
+          <div id="display">
+            {result?.length === 0 ? "0" : result.replace?.(/\*/g, "x")}
           </div>
-          <div id="result">{result}</div>
         </div>
         <div className="container">
           {CALCULATOR_KEYS.map(({ nameKey, className, id }) => {

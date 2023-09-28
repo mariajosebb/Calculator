@@ -23,7 +23,7 @@ body {
   border-radius: 4px;
 }
 
-#display {
+#display-container {
   height: 80px;
   width: 100%;
 
@@ -31,7 +31,7 @@ body {
   font-family: "Share Tech Mono", monospace;
 }
 
-#result {
+#display {
   text-align: right;
   font-size: x-large;
   color: #d5d5c4;
